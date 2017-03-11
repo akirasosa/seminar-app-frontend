@@ -1,20 +1,35 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import {BrowserModule} from "@angular/platform-browser";
+import {NgModule} from "@angular/core";
+import {FormsModule} from "@angular/forms";
+import {HttpModule} from "@angular/http";
 
-import { AppComponent } from './app.component';
+import {AppComponent} from "./app.component";
+import {TopComponent} from "./top/top.component";
+import {PreloadAllModules, RouterModule} from "@angular/router";
+import {ROUTES} from "./app.routes";
+import {RegistrationComponent} from "./registration/registration.component";
+import {TopGuard} from "./top/top.guard";
+import {AwsSettingResolver} from "../services/aws-setting.resolver";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TopComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(ROUTES, {
+      preloadingStrategy: PreloadAllModules
+    }),
   ],
-  providers: [],
+  providers: [
+    AwsSettingResolver,
+    TopGuard,
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
