@@ -1,6 +1,9 @@
+<h1>VPC Hands-on Help Page</h1>
+<p>This page helps you to create your first VPC.</p>
 
-<pre>
-variable "aws_access_key" &#123;
+<h2>Your Configuration</h2>
+<p>Here is your configuration to use.</p>
+<pre><code>variable "aws_access_key" &#123;
   default = "{{setting.accessKey}}"
 &#125;
 variable "aws_secret_key" &#123;
@@ -10,6 +13,20 @@ variable "aws_region" &#123;
   default = "{{setting.region}}"
 &#125;
 variable "vpc_cidr" &#123;
-  default = ""
+  default = "{{setting.vpcCidr}}"
 &#125;
-</pre>
+</code></pre>
+
+<p>You can sign in to <a href="https://947443245494.signin.aws.amazon.com/console">AWS console</a>. Account ID is <code>{{setting.username}}</code>. Password is <code>{{setting.password}}</code>. Don't forget to move to your region <code>{{setting.region}}</code> after visiting EC2 or VPC page.</p>
+
+<h2>Steps to create your first VPC.</h2>
+<ol>
+  <li>Download Terraform from <a href="https://www.terraform.io/downloads.html">download page</a>.</li>
+  <li>Put the binary into somewhere in your PATH.</li>
+  <li>Download our <a href="/assets/step00-template.zip">template</a> and extract it.</li>
+  <li>Paste your configuration onto <code>variables.tf</code>.</li>
+  <li>Run <code>terraform plan</code> in the directory you extracted our template.</li>
+  <li>Run <code>terraform apply</code>.</li>
+  <li>Confirm that your VPC was created on AWS Console.</li>
+</ol>
+
