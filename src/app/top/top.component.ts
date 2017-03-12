@@ -10,6 +10,8 @@ import {AwsSetting} from "../../domain/aws-setting";
 export class TopComponent implements OnInit {
 
   setting: AwsSetting;
+  hostname = location.hostname;
+  port = location.port;
 
   constructor(private route: ActivatedRoute) {
   }
