@@ -4,34 +4,20 @@
 <h2>example.tf</h2>
 <p>This is all what you need to create your first VPC.</p>
 <pre><code>resource "aws_vpc" "main" &#123;
-  cidr_block = "$&#123;var.vpc_cidr&#125;"
+  cidr_block = "{{setting.vpcCidr}}"
 &#125;
 
 provider "aws" &#123;
-  access_key = "$&#123;var.aws_access_key&#125;"
-  secret_key = "$&#123;var.aws_secret_key&#125;"
-  region = "$&#123;var.aws_region&#125;"
-&#125;
-
-variable "aws_access_key" &#123;
-  default = "{{setting.accessKey}}"
-&#125;
-variable "aws_secret_key" &#123;
-  default = "{{setting.secretKey}}"
-&#125;
-variable "aws_region" &#123;
-  default = "{{setting.region}}"
-&#125;
-variable "vpc_cidr" &#123;
-  default = "{{setting.vpcCidr}}"
+  access_key = "{{setting.accessKey}}"
+  secret_key = "{{setting.secretKey}}"
+  region = "{{setting.region}}"
 &#125;
 </code></pre>
 
-<p><span class="badge badge-info">Info</span> Though I wrote it as a single file, it would be a good idea to separate it. For example...</p>
+<p><span class="badge badge-info">Info</span> Though I wrote it as a single file, it would be a good idea to separate it as your project grows. For example...</p>
 <pre>
 project_dir/
   vpc.tf          # define your vpc
-  variables.tf    # define your variables
   aws.tf          # define your aws provider settings
 </pre>
 
