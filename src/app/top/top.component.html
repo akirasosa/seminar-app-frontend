@@ -1,9 +1,19 @@
 <h1>VPC Hands-on Help Page</h1>
 <p>This page helps you to create your first VPC.</p>
 
-<h2>Your Configuration</h2>
-<p>Here is your configuration to use.</p>
-<pre><code>variable "aws_access_key" &#123;
+<h2>example.tf</h2>
+<p>This is all what you need to create your first VPC.</p>
+<pre><code>resource "aws_vpc" "main" &#123;
+  cidr_block = "$&#123;var.vpc_cidr&#125;"
+&#125;
+
+provider "aws" &#123;
+  access_key = "$&#123;var.aws_access_key&#125;"
+  secret_key = "$&#123;var.aws_secret_key&#125;"
+  region = "$&#123;var.aws_region&#125;"
+&#125;
+
+variable "aws_access_key" &#123;
   default = "{{setting.accessKey}}"
 &#125;
 variable "aws_secret_key" &#123;
@@ -17,25 +27,31 @@ variable "vpc_cidr" &#123;
 &#125;
 </code></pre>
 
-<p>You can sign in to <a href="https://947443245494.signin.aws.amazon.com/console">AWS console</a>. Account ID is <code>{{setting.username}}</code>. Password is <code>{{setting.password}}</code>. Don't forget to move to your region <code>{{setting.region}}</code> after visiting EC2 or VPC page.</p>
+<p><span class="badge badge-info">Info</span> Though I wrote it as a single file, it would be a good idea to separate it. For example...</p>
+<pre>
+project_dir/
+  vpc.tf          # define your vpc
+  variables.tf    # define your variables
+  aws.tf          # define your aws provider settings
+</pre>
 
 <h2>Steps to create your first VPC.</h2>
 <ol>
   <li>Download Terraform from <a href="https://www.terraform.io/downloads.html">download page</a>.</li>
   <li>Put the binary into somewhere in your PATH.</li>
-  <li>Download our <a href="/assets/step00-template.zip">template</a> and extract it.</li>
-  <li>Paste your configuration onto <code>variables.tf</code>.</li>
-  <li>Run <code>terraform plan</code> in the directory you extracted our template.</li>
+  <li>Save <code>example.tf</code> into your project dir.</li>
+  <li>Run <code>terraform plan</code> in your project dir.</li>
   <li>Run <code>terraform apply</code>.</li>
   <li>Confirm that your VPC was created on AWS Console.</li>
 </ol>
 
-<p>Mac User?</p>
+<p>You can sign in to <a href="https://947443245494.signin.aws.amazon.com/console">AWS console</a>. Account ID is <code>{{setting.username}}</code>. Password is <code>{{setting.password}}</code>. Don't forget to move to your region <code>{{setting.region}}</code> after visiting EC2 or VPC page.</p>
+
+<p><span class="badge badge-info">Info</span> Mac User?</p>
 <pre><code>brew install terraform
-wget "http://{{hostname}}:{{port}}/assets/step00-template.zip"
-unzip step00-template.zip
-cd step00-template
-# Open and edit variables.tf
+mkdir project_dir
+cd project_dir
+# Save example.tf
 terraform plan
 terraform apply
 </code></pre>
